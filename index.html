@@ -7,156 +7,204 @@
   <meta name="description" content="近藤歯科医院の公式ホームページ。診療時間・アクセス・お問い合わせはこちら。" />
 
   <style>
-    :root { --max: 900px; --pad: 18px; }
+    :root{
+      --max: 980px;
+      --pad: 18px;
+
+      /* ===== Beige-based clean + warm clinic palette ===== */
+      --bgTop: #fbf7f0;         /* very light beige */
+      --bgMid: #ffffff;
+      --bgBottom: #f6fbff;      /* ほんのりaliceblue（清潔感の補助） */
+
+      --card: #ffffff;
+
+      --text: #24303f;          /* softer charcoal */
+      --muted: #667085;
+
+      --line: #efe7db;          /* beige border */
+      --shadow: 0 12px 34px rgba(16, 24, 40, 0.06);
+
+      --accent: #2a8f86;        /* teal (清潔感のアクセント) */
+      --accentSoft: #e7f6f3;    /* teal tint */
+      --accent2: #f3fbfa;
+
+      --radius: 14px;
+    }
+
+    *{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
 
     body{
       margin:0;
-      font-family: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
-      line-height:1.8;
-      color:#222;
-      background:#fff;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", "Yu Gothic", "Meiryo", sans-serif;
+      line-height:1.85;
+      color: var(--text);
+      background:
+        radial-gradient(1100px 520px at 18% -10%, #ffffff 0%, rgba(255,255,255,0) 62%),
+        linear-gradient(180deg, var(--bgTop) 0%, var(--bgMid) 58%, var(--bgBottom) 100%);
     }
 
-    header{ background:#f6f6f6; padding:22px var(--pad); }
-    .wrap{ max-width: var(--max); margin:0 auto; }
-    h1{ margin:0 0 6px; font-size: 26px; }
-    .sub{ margin:0; color:#555; }
+    .wrap{ max-width: var(--max); margin:0 auto; padding:0 var(--pad); }
 
-    section{ padding:26px var(--pad); scroll-margin-top: 84px; }
-    h2{ margin:0 0 12px; font-size: 18px; border-bottom: 1px solid #e5e5e5; padding-bottom: 6px; }
+    /* ===== Header ===== */
+    .topbar{
+      background:
+        radial-gradient(900px 260px at 18% 0%, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0) 60%),
+        linear-gradient(180deg, #fbf4ea 0%, #ffffff 60%, rgba(255,255,255,0.86) 100%);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }
+
+    header{ padding: 26px 0 18px; }
+
+    h1{
+      margin:0 0 6px;
+      font-size: 28px;
+      letter-spacing: 0.02em;
+      font-weight: 800;
+    }
+    .sub{ margin:0; color: var(--muted); }
+
+    .kv{ display:grid; gap:12px; align-items:stretch; }
+    @media (min-width: 820px){
+      .kv{ grid-template-columns: 1.25fr 0.75fr; }
+    }
+
+    /* ===== Sections / Cards ===== */
+    section{ padding: 26px 0; scroll-margin-top: 92px; }
+
+    h2{
+      margin:0 0 12px;
+      font-size: 18px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eee4d6;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      font-weight: 800;
+    }
+    h2::before{
+      content:"";
+      width:10px; height:10px;
+      border-radius:999px;
+      background: var(--accent);
+      /* 周囲の青いリングは“見出し”だけの控えめなアクセントとして残す */
+      box-shadow: 0 0 0 6px var(--accentSoft);
+    }
 
     .grid{ display:grid; grid-template-columns: 1fr; gap:14px; }
-    .card{ border:1px solid #eee; border-radius:10px; padding:14px; background:#fff; }
+    @media (min-width: 820px){
+      .grid{ grid-template-columns: 1fr 1fr; }
+    }
 
-    .kv{ display:grid; gap:10px; align-items:start; }
+    .card{
+      border: 1px solid #f0e7da;
+      border-radius: var(--radius);
+      padding: 16px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+    @media (min-width: 820px){ .card{ padding:18px; } }
 
-    img{ max-width:100%; height:auto; border-radius:10px; border:1px solid #eee; }
+    img{
+      max-width:100%;
+      height:auto;
+      border-radius: 12px;
+      border:1px solid #f0e7da;
+    }
 
-    .tel a{ font-weight:700; font-size: 20px; text-decoration:none; color:#111; }
-    .tel-btn{
-      display:inline-block;
-      padding:10px 12px;
-      border-radius:10px;
-      background:#fff;
-      border:1px solid #e5e5e5;
-      text-decoration:none;
-      color:#111;
-      font-weight:700;
+    /* ===== Button (single tel button) ===== */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(42,143,134,0.28);
+      background: linear-gradient(180deg, #ffffff 0%, var(--accent2) 100%);
+      color: var(--text);
+      font-weight: 800;
       font-size: 18px;
+      text-decoration:none;
+      box-shadow: 0 12px 24px rgba(42,143,134,0.10);
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+      width: 100%;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(42,143,134,0.40);
+      box-shadow: 0 14px 28px rgba(42,143,134,0.14);
+    }
+    .btn:active{ transform: translateY(0px); }
+
+    /* ===== Tel card ===== */
+    .tel-title{
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 10px;
+      font-weight: 700;
+      letter-spacing: .02em;
     }
 
     .hours-mini{
-      margin-top: 6px;
-      font-size: 14px;
-      color: #777;
-      line-height: 1.4;
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
     }
+    /* 土曜だけ改行 */
+    .break-sat{ display:block; margin-top: 2px; }
 
-    footer{ background:#f6f6f6; padding:16px var(--pad); color:#666; font-size: 13px; }
-
-    @media (min-width: 820px){
-      .grid{ grid-template-columns: 1fr 1fr; }
-      .kv{ grid-template-columns: 1.2fr 0.8fr; align-items:center; }
-    }
-
-    /* ===== 上部タブ（押すと該当セクションへ） ===== */
+    /* ===== Tabs ===== */
     .tabs{
       position: sticky;
       top: 0;
       z-index: 20;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(6px);
-      border-bottom: 1px solid #eee;
+      background: rgba(251, 247, 240, 0.90); /* beige */
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255,255,255,0.9);
+      border-bottom: 1px solid #f0e7da;
     }
     .tabs .wrap{
       display:flex;
       gap:8px;
       overflow:auto;
-      padding:10px var(--pad);
+      padding: 10px var(--pad);
       max-width: var(--max);
       margin:0 auto;
     }
     .tab{
       white-space:nowrap;
       text-decoration:none;
-      color:#333;
-      border:1px solid #e6e6e6;
-      background:#fff;
-      border-radius:999px;
-      padding:8px 12px;
+      color: var(--text);
+      border: 1px solid #f0e7da;
+      background: rgba(255,255,255,0.92);
+      border-radius: 999px;
+      padding: 8px 12px;
       font-size: 13px;
+      box-shadow: 0 8px 18px rgba(16, 24, 40, 0.05);
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
     }
-    .tab:active{ transform: translateY(1px); }
-
-    /* ===== 施設責任者（写真付き） ===== */
-    .profile{
-      display:grid;
-      gap:12px;
-      align-items:start;
-    }
-    @media (min-width: 820px){
-      .profile{ grid-template-columns: 220px 1fr; }
-      .profile img{ border-radius:12px; }
-    }
-    .profile-name{ font-weight:700; font-size: 16px; margin:0 0 6px; }
-    .profile-text{ margin:0; color:#444; }
-
-    /* ===== 診療時間：● / - 表 ===== */
-    .hours-table{
-      width:100%;
-      border-collapse: collapse;
-      overflow:hidden;
-      border:1px solid #eee;
-      border-radius:10px;
-    }
-    .hours-table th,
-    .hours-table td{
-      border-bottom:1px solid #eee;
-      border-right:1px solid #eee;
-      padding:10px 8px;
-      text-align:center;
-      font-size: 14px;
-    }
-    .hours-table th{
-      background:#fafafa;
-      font-weight:700;
-    }
-    .hours-table tr:last-child td{ border-bottom:none; }
-    .hours-table th:last-child,
-    .hours-table td:last-child{ border-right:none; }
-
-    .mark{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:26px;
-      height:26px;
-      border-radius:999px;
-      font-weight:800;
-      border:1px solid #ddd;
-      background:#fff;
-    }
-
-    .note{
-      margin:10px 0 0;
-      font-size: 13px;
-      color:#666;
+    .tab:hover{
+      transform: translateY(-1px);
+      border-color: rgba(42,143,134,0.22);
+      box-shadow: 0 10px 22px rgba(42,143,134,0.10);
     }
 
     /* ===== Slider ===== */
-    .full-slider{ padding: 14px 0; }
-    .slider-block{ display:block; }
-
+    .full-slider{ padding: 16px 0 8px; }
     .slider{
       position:relative;
       overflow:hidden;
       max-width: 1400px;
       margin: 0 auto;
-      border-radius:10px;
-      border:1px solid #eee;
+      border-radius: var(--radius);
+      border: 1px solid #f0e7da;
       background:#fff;
+      box-shadow: var(--shadow);
     }
-    .slides{ display:flex; transition: transform 300ms ease; will-change: transform; }
+    .slides{ display:flex; transition: transform 320ms ease; will-change: transform; }
     .slide{ flex: 0 0 100%; }
     .slide img{
       display:block;
@@ -166,71 +214,161 @@
       border:0;
       border-radius:0;
     }
-    @media (min-width: 820px){
-      .slide img{ height:360px; }
-    }
+    @media (min-width: 820px){ .slide img{ height:380px; } }
+
     .nav{
       position:absolute; top:50%; transform:translateY(-50%);
-      width:38px; height:38px; border-radius:50%;
-      border:1px solid rgba(0,0,0,0.15); background:rgba(255,255,255,0.85);
-      cursor:pointer; font-size:26px; line-height:34px;
+      width:40px; height:40px; border-radius:50%;
+      border:1px solid rgba(16, 24, 40, 0.14);
+      background: rgba(255,255,255,0.92);
+      cursor:pointer;
+      font-size:26px; line-height:36px;
+      color: var(--text);
+      box-shadow: 0 12px 24px rgba(16, 24, 40, 0.10);
     }
     .nav.prev{ left:10px; }
     .nav.next{ right:10px; }
+    .nav:hover{ border-color: rgba(42,143,134,0.22); }
 
     .dots{
       position:absolute; left:0; right:0; bottom:10px;
-      display:flex; gap:6px; justify-content:center;
+      display:flex; gap:7px; justify-content:center;
     }
     .dot{
-      width:8px; height:8px; border-radius:50%;
-      border:1px solid rgba(0,0,0,0.3);
-      background:rgba(255,255,255,0.7); cursor:pointer;
+      width:9px; height:9px; border-radius:50%;
+      border:1px solid rgba(16,24,40,0.25);
+      background: rgba(255,255,255,0.7);
+      cursor:pointer;
     }
-    .dot.active{ background:rgba(0,0,0,0.6); }
+    .dot.active{
+      background: var(--accent);
+      border-color: rgba(42,143,134,0.55);
+    }
 
     .slider-note{
       max-width:1400px;
       margin:10px auto 0;
       padding:0 18px;
       font-size:13px;
-      color:#666;
+      color: var(--muted);
     }
+
+    /* ===== Hours table ===== */
+    .hours-table{
+      width:100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border:1px solid #f0e7da;
+      border-radius: var(--radius);
+      overflow:hidden;
+      background:#fff;
+    }
+    .hours-table th,
+    .hours-table td{
+      padding: 11px 8px;
+      text-align:center;
+      font-size: 14px;
+      border-bottom:1px solid #f0e7da;
+      border-right:1px solid #f0e7da;
+    }
+    .hours-table thead th{
+      background: linear-gradient(180deg, #ffffff 0%, #fbf4ea 100%);
+      font-weight:800;
+    }
+    .hours-table tbody th{
+      background: #fffaf3;
+      font-weight:800;
+      color:#111827;
+    }
+    .hours-table tr:last-child td,
+    .hours-table tr:last-child th{ border-bottom:none; }
+    .hours-table th:last-child,
+    .hours-table td:last-child{ border-right:none; }
+
+    /* ✅ 周囲の青い丸（リング）を消す：影/装飾なしのシンプルな印 */
+    .mark{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:22px;
+      height:22px;
+      border-radius:999px;
+      font-weight:900;
+      border:none;          /* ← 消す */
+      background: transparent; /* ← 消す */
+      line-height: 1;
+    }
+    .mark.open{ color: #111827; }     /* ●は文字として表示 */
+    .mark.close{ color: #9aa4b2; }    /* —は薄いグレー */
+
+    .note{
+      margin: 10px 0 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .note strong{ color:#111827; }
 
     /* ===== map ===== */
     .map-embed{
       width:100%;
       height:320px;
-      border:0;
-      border-radius:10px;
+      border: 1px solid #f0e7da;
+      border-radius: var(--radius);
       margin-top:10px;
+      box-shadow: var(--shadow);
     }
     @media (min-width: 820px){ .map-embed{ height:380px; } }
+
+    footer{
+      margin-top: 10px;
+      padding: 16px 0 26px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid #f0e7da;
+      background: rgba(255,255,255,0.62);
+      backdrop-filter: blur(8px);
+    }
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    ul{ margin: 0; padding-left: 18px; }
+    a{ color: inherit; }
   </style>
 </head>
 
 <body>
-  <header id="top">
-    <div class="wrap kv">
-      <div>
-        <h1>近藤歯科医院</h1>
-        <p class="sub">地域の皆さまが安心して通える歯科医院を目指しています。</p>
-      </div>
+  <div class="topbar">
+    <header id="top">
+      <div class="wrap kv">
+        <div>
+          <h1>近藤歯科医院</h1>
+          <p class="sub">地域の皆さまが安心して通える歯科医院を目指しています。</p>
+        </div>
 
-      <div class="card tel">
-        <div>お電話（予約・お問い合わせ）</div>
-        <div><a href="tel:0458938855" class="tel-btn">📞 045-893-8855</a></div>
-        <div style="color:#666; font-size:13px;">※診療時間内にお電話ください</div>
+        <div class="card">
+          <div class="tel-title">ご予約はこちら</div>
 
-        <div class="hours-mini">
-          <div>診療時間：10:00〜13:00 / 15:00〜19:00(土曜〜17:00)</div>
-          <div>休診日：木曜・日曜・祝日</div>
+          <!-- ボタンは電話番号のみ（tel） -->
+          <a class="btn" href="tel:0458938855" aria-label="電話をかける">📞 045-893-8855</a>
+
+          <div class="hours-mini">
+            <div>
+              診療時間：10:00〜13:00 / 15:00〜19:00
+              <span class="break-sat">（土曜〜17:00）</span>
+            </div>
+            <div>休診日：木曜・日曜・祝日</div>
+            <div style="margin-top:6px;">※診療時間内にお電話ください</div>
+          </div>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
+  </div>
 
-  <!-- タブ（押すと該当セクションへ） -->
   <nav class="tabs" aria-label="ページ内メニュー">
     <div class="wrap">
       <a class="tab" href="#photos">医院写真</a>
@@ -246,7 +384,9 @@
 
   <!-- 医院写真 -->
   <section class="full-slider" id="photos">
-    <h2 class="wrap">医院の写真</h2>
+    <div class="wrap">
+      <h2>医院の写真</h2>
+    </div>
 
     <div class="slider-block">
       <div class="slider" aria-label="医院写真スライダー">
@@ -265,24 +405,24 @@
     </div>
   </section>
 
-  <!-- メイン（カード群） -->
+  <!-- メイン -->
   <section>
     <div class="wrap grid">
 
-      <!-- 初めての方へ（帯） -->
+      <!-- 初めての方へ -->
       <div class="card" id="first" style="grid-column: 1 / -1;">
         <h2>初めての方へ</h2>
         <p style="margin:0;">
           当院は<strong>お電話でのご予約</strong>をお願いしています。<br>
           初診の際は、<strong>保険証（お持ちの方は医療証）</strong>をご持参ください。
         </p>
-        <div style="margin-top:10px;">
-          <a href="tel:0458938855" class="tel-btn">📞045-893-8855</a>
-          <div style="color:#666; font-size:13px;">※診療時間内にお電話ください</div>
+        <div style="margin-top:12px;">
+          <a href="tel:0458938855" class="btn" style="max-width: 360px; width:auto;" aria-label="電話をかける">📞 045-893-8855</a>
+          <div style="color:var(--muted); font-size:13px; margin-top:6px;">※診療時間内にお電話ください</div>
         </div>
       </div>
 
-      <!-- 診療時間（● / - 表） -->
+      <!-- 診療時間 -->
       <div class="card" id="hours" style="grid-column: 1 / -1;">
         <h2>診療時間</h2>
 
@@ -296,33 +436,33 @@
           <tbody>
             <tr>
               <th>10:00〜13:00</th>
-              <td><span class="mark">●</span></td>
-              <td><span class="mark">●</span></td>
-              <td><span class="mark">●</span></td>
-              <td><span class="mark">-</span></td>
-              <td><span class="mark">●</span></td>
-              <td><span class="mark">●</span></td>
-              <td><span class="mark">-</span></td>
+              <td><span class="mark open">●</span></td>
+              <td><span class="mark open">●</span></td>
+              <td><span class="mark open">●</span></td>
+              <td><span class="mark close">—</span></td>
+              <td><span class="mark open">●</span></td>
+              <td><span class="mark open">●</span></td>
+              <td><span class="mark close">—</span></td>
             </tr>
             <tr>
               <th>15:00〜19:00</th>
-              <td><span class="mark">●</span></td>
-              <td><span class="mark">●</span></td>
-              <td><span class="mark">●</span></td>
-              <td><span class="mark">-</span></td>
-              <td><span class="mark">●</span></td>
-              <td><span class="mark">-</span></td>
-              <td><span class="mark">-</span></td>
+              <td><span class="mark open">●</span></td>
+              <td><span class="mark open">●</span></td>
+              <td><span class="mark open">●</span></td>
+              <td><span class="mark close">—</span></td>
+              <td><span class="mark open">●</span></td>
+              <td><span class="mark close">—</span></td>
+              <td><span class="mark close">—</span></td>
             </tr>
             <tr>
               <th>15:00〜17:00</th>
-              <td><span class="mark">-</span></td>
-              <td><span class="mark">-</span></td>
-              <td><span class="mark">-</span></td>
-              <td><span class="mark">-</span></td>
-              <td><span class="mark">-</span></td>
-              <td><span class="mark">●</span></td>
-              <td><span class="mark">-</span></td>
+              <td><span class="mark close">—</span></td>
+              <td><span class="mark close">—</span></td>
+              <td><span class="mark close">—</span></td>
+              <td><span class="mark close">—</span></td>
+              <td><span class="mark close">—</span></td>
+              <td><span class="mark open">●</span></td>
+              <td><span class="mark close">—</span></td>
             </tr>
           </tbody>
         </table>
@@ -330,10 +470,10 @@
         <p class="note"><strong>休診日：木曜・日曜・祝日</strong>（※臨時休診はお知らせをご確認ください）</p>
       </div>
 
-      <!-- 診療内容（左） -->
+      <!-- 診療内容 -->
       <div class="card" id="services">
         <h2>診療内容</h2>
-        <ul style="margin:0; padding-left:18px;">
+        <ul>
           <li>虫歯治療</li>
           <li>歯周病治療</li>
           <li>予防歯科</li>
@@ -342,7 +482,7 @@
         </ul>
       </div>
 
-      <!-- アクセス（右） -->
+      <!-- アクセス -->
       <div class="card" id="access">
         <h2>アクセス</h2>
         <div><strong>住所：</strong>247-0006 横浜市栄区小菅ヶ谷1-19-21</div>
@@ -354,25 +494,24 @@
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3253.614697036277!2d139.54329307297004!3d35.36520734727419!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60184547021d6559%3A0xe869f43b6b370a8!2z6L-R6Jek5q2v56eR5Yy76Zmi!5e0!3m2!1sja!2sjp!4v1766913069316!5m2!1sja!2sjp"
           allowfullscreen=""
           loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
 
-      <!-- 施設情報（帯） -->
+      <!-- 施設情報 -->
       <div class="card" id="facility" style="grid-column: 1 / -1;">
         <h2>施設情報</h2>
         <h3 style="margin:10px 0 6px; font-size:15px;">施設基準（届出事項）</h3>
-        <p style="margin-top:0; color:#666;">
+        <p style="margin-top:0; color:var(--muted);">
           当院は、厚生労働省の定める以下の施設基準等の届出を行っています。
         </p>
-        <ul style="margin:0; padding-left:18px;">
+        <ul>
           <li>歯科初診料の注1に規定する施設基準（歯初診）</li>
           <li>歯科外来診療医療安全対策加算1（外安全1）</li>
           <li>歯科外来診療感染対策加算1（外感染1）</li>
         </ul>
       </div>
 
-      <!-- 採用（帯） -->
+      <!-- 採用 -->
       <div class="card" id="recruit" style="grid-column: 1 / -1;">
         <h2>歯科衛生士募集</h2>
         <p style="margin-top:0;">
@@ -380,19 +519,19 @@
           <strong>歯科衛生士</strong>を募集しています。
         </p>
         <p>勤務条件や待遇などの<strong>詳細は、お問い合わせください</strong>。</p>
-        <p class="tel" style="margin-top:10px;">
-          📞 <a href="tel:0458938855">045-893-8855</a>
+        <p style="margin-top:12px;">
+          <a href="tel:0458938855" class="btn" style="max-width: 360px; width:auto;" aria-label="採用について電話する">📞 045-893-8855</a>
         </p>
       </div>
 
-      <!-- 施設責任者（写真付き：帯） -->
+      <!-- 施設責任者 -->
       <div class="card" id="director" style="grid-column: 1 / -1;">
         <h2>施設責任者</h2>
-        <div class="profile">
+        <div class="profile" style="display:grid; gap:12px;">
           <img src="images/director.jpg" alt="施設責任者（院長）の写真">
           <div>
-            <p class="profile-name">院長：近藤 謙</p>
-            <p class="profile-text">
+            <p style="font-weight:800; font-size:16px; margin:0 0 8px;">院長：近藤 謙</p>
+            <p style="margin:0; color:#374151;">
               〈学歴〉1986年 神奈川歯科大学歯学部卒業<br>
               〈開業〉1989年<br>
               患者さまが安心して治療を受けられるよう、わかりやすい説明と丁寧な診療を大切にしています。<br>
@@ -406,7 +545,14 @@
   </section>
 
   <footer>
-    <div class="wrap">© 近藤歯科医院</div>
+    <div class="wrap footer-inner">
+      <div>© 近藤歯科医院</div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="tab" href="#top">ページ上部へ</a>
+        <a class="tab" href="#access">アクセス</a>
+        <a class="tab" href="#hours">診療時間</a>
+      </div>
+    </div>
   </footer>
 
   <script>
