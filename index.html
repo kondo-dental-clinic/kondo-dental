@@ -12,20 +12,20 @@
       --pad: 18px;
 
       /* ===== Beige-based clean + warm clinic palette ===== */
-      --bgTop: #fbf7f0;         /* very light beige */
+      --bgTop: #fbf7f0;
       --bgMid: #ffffff;
-      --bgBottom: #f6fbff;      /* ほんのりaliceblue（清潔感の補助） */
+      --bgBottom: #f6fbff;
 
       --card: #ffffff;
 
-      --text: #24303f;          /* softer charcoal */
+      --text: #24303f;
       --muted: #667085;
 
-      --line: #efe7db;          /* beige border */
+      --line: #efe7db;
       --shadow: 0 12px 34px rgba(16, 24, 40, 0.06);
 
-      --accent: #2a8f86;        /* teal (清潔感のアクセント) */
-      --accentSoft: #e7f6f3;    /* teal tint */
+      --accent: #2a8f86;
+      --accentSoft: #e7f6f3;
       --accent2: #f3fbfa;
 
       --radius: 14px;
@@ -70,7 +70,6 @@
       .kv{ grid-template-columns: 1.25fr 0.75fr; }
     }
 
-    /* ===== Sections / Cards ===== */
     section{ padding: 26px 0; scroll-margin-top: 92px; }
 
     h2{
@@ -88,7 +87,6 @@
       width:10px; height:10px;
       border-radius:999px;
       background: var(--accent);
-      /* 周囲の青いリングは“見出し”だけの控えめなアクセントとして残す */
       box-shadow: 0 0 0 6px var(--accentSoft);
     }
 
@@ -138,7 +136,6 @@
     }
     .btn:active{ transform: translateY(0px); }
 
-    /* ===== Tel card ===== */
     .tel-title{
       color: var(--muted);
       font-size: 13px;
@@ -153,7 +150,6 @@
       color: var(--muted);
       line-height: 1.55;
     }
-    /* 土曜だけ改行 */
     .break-sat{ display:block; margin-top: 2px; }
 
     /* ===== Tabs ===== */
@@ -161,7 +157,7 @@
       position: sticky;
       top: 0;
       z-index: 20;
-      background: rgba(251, 247, 240, 0.90); /* beige */
+      background: rgba(251, 247, 240, 0.90);
       backdrop-filter: blur(10px);
       border-top: 1px solid rgba(255,255,255,0.9);
       border-bottom: 1px solid #f0e7da;
@@ -192,12 +188,12 @@
       box-shadow: 0 10px 22px rgba(42,143,134,0.10);
     }
 
-    /* ===== Slider ===== */
+    /* ===== Slider (shared) ===== */
     .full-slider{ padding: 16px 0 8px; }
+
     .slider{
       position:relative;
       overflow:hidden;
-      max-width: 1400px;
       margin: 0 auto;
       border-radius: var(--radius);
       border: 1px solid #f0e7da;
@@ -206,15 +202,15 @@
     }
     .slides{ display:flex; transition: transform 320ms ease; will-change: transform; }
     .slide{ flex: 0 0 100%; }
+
+    /* 画像は高さ固定しない（比率で管理） */
     .slide img{
       display:block;
       width:100%;
-      height:300px;
-      object-fit:cover;
       border:0;
       border-radius:0;
+      object-fit:cover;
     }
-    @media (min-width: 820px){ .slide img{ height:380px; } }
 
     .nav{
       position:absolute; top:50%; transform:translateY(-50%);
@@ -228,7 +224,6 @@
     }
     .nav.prev{ left:10px; }
     .nav.next{ right:10px; }
-    .nav:hover{ border-color: rgba(42,143,134,0.22); }
 
     .dots{
       position:absolute; left:0; right:0; bottom:10px;
@@ -246,12 +241,35 @@
     }
 
     .slider-note{
-      max-width:1400px;
       margin:10px auto 0;
       padding:0 18px;
       font-size:13px;
       color: var(--muted);
+      max-width: 1100px;
     }
+
+    /* ===== Top (hero) slider settings ===== */
+    .slider.hero{
+      max-width: 1100px; /* 気持ち小さめ */
+    }
+    .slider.hero .slide img{
+      aspect-ratio: 4 / 3; /* 横4 : 縦3 */
+    }
+
+    /* ===== Recruit slider settings ===== */
+    .slider.recruit{
+      max-width: 360px; /* ヘッダーの約1/3を目安 */
+      margin: 12px 0 0; /* カード内なので左寄せでも自然 */
+      border-radius: 12px;
+    }
+    .slider.recruit .slide img{
+      aspect-ratio: 3 / 4; /* 横3 : 縦4 */
+    }
+    .slider.recruit .nav{
+      width:34px; height:34px; font-size:22px; line-height:30px;
+    }
+    .slider.recruit .dots{ bottom: 8px; }
+    .slider.recruit .dot{ width:8px; height:8px; }
 
     /* ===== Hours table ===== */
     .hours-table{
@@ -285,7 +303,7 @@
     .hours-table th:last-child,
     .hours-table td:last-child{ border-right:none; }
 
-    /* ✅ 周囲の青い丸（リング）を消す：影/装飾なしのシンプルな印 */
+    /* mark: 周囲の色付き丸は消す */
     .mark{
       display:inline-flex;
       align-items:center;
@@ -294,12 +312,12 @@
       height:22px;
       border-radius:999px;
       font-weight:900;
-      border:none;          /* ← 消す */
-      background: transparent; /* ← 消す */
+      border:none;
+      background: transparent;
       line-height: 1;
     }
-    .mark.open{ color: #111827; }     /* ●は文字として表示 */
-    .mark.close{ color: #9aa4b2; }    /* —は薄いグレー */
+    .mark.open{ color: #111827; }
+    .mark.close{ color: #9aa4b2; }
 
     .note{
       margin: 10px 0 0;
@@ -352,8 +370,6 @@
 
         <div class="card">
           <div class="tel-title">ご予約はこちら</div>
-
-          <!-- ボタンは電話番号のみ（tel） -->
           <a class="btn" href="tel:0458938855" aria-label="電話をかける">📞 045-893-8855</a>
 
           <div class="hours-mini">
@@ -376,24 +392,25 @@
       <a class="tab" href="#hours">診療時間</a>
       <a class="tab" href="#services">診療内容</a>
       <a class="tab" href="#access">アクセス</a>
-      <a class="tab" href="#facility">施設情報</a>
       <a class="tab" href="#recruit">採用</a>
       <a class="tab" href="#director">施設責任者</a>
+      <a class="tab" href="#facility">施設情報</a>
     </div>
   </nav>
 
-  <!-- 医院写真 -->
+  <!-- トップ：医院写真（4枚 / 4:3 / 少し小さめ） -->
   <section class="full-slider" id="photos">
     <div class="wrap">
       <h2>医院の写真</h2>
     </div>
 
     <div class="slider-block">
-      <div class="slider" aria-label="医院写真スライダー">
+      <div class="slider hero" aria-label="医院写真スライダー">
         <div class="slides" id="clinicSlides">
           <div class="slide"><img src="images/slide1.jpg" alt="医院外観"></div>
           <div class="slide"><img src="images/slide2.jpg" alt="待合室"></div>
           <div class="slide"><img src="images/slide3.jpg" alt="診療室"></div>
+          <div class="slide"><img src="images/slide4.jpg" alt="院内の雰囲気"></div>
         </div>
 
         <button class="nav prev" type="button" aria-label="前の写真" id="prevSlide">‹</button>
@@ -497,30 +514,31 @@
           referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
 
-      <!-- 施設情報 -->
-      <div class="card" id="facility" style="grid-column: 1 / -1;">
-        <h2>施設情報</h2>
-        <h3 style="margin:10px 0 6px; font-size:15px;">施設基準（届出事項）</h3>
-        <p style="margin-top:0; color:var(--muted);">
-          当院は、厚生労働省の定める以下の施設基準等の届出を行っています。
-        </p>
-        <ul>
-          <li>歯科初診料の注1に規定する施設基準（歯初診）</li>
-          <li>歯科外来診療医療安全対策加算1（外安全1）</li>
-          <li>歯科外来診療感染対策加算1（外感染1）</li>
-        </ul>
-      </div>
-
-      <!-- 採用 -->
+      <!-- 採用（5枚 / 約1/3サイズ / 3:4） -->
       <div class="card" id="recruit" style="grid-column: 1 / -1;">
         <h2>歯科衛生士募集</h2>
         <p style="margin-top:0;">
           当院では、患者さまに寄り添った診療を一緒に支えてくださる
           <strong>歯科衛生士</strong>を募集しています。
         </p>
-        <p>勤務条件や待遇などの<strong>詳細は、お問い合わせください</strong>。</p>
+        <p>勤務条件や待遇などの<strong>詳細は、お問い合わせください</strong>。</p> <a href="tel:0458938855" class="btn" style="max-width: 360px; width:auto;" aria-label="採用について電話する">📞 045-893-8855</a>
+
+        <div class="slider recruit" aria-label="採用写真スライダー">
+          <div class="slides" id="recruitSlides">
+            <div class="slide"><img src="images/recruit1.jpg" alt="スタッフの様子"></div>
+            <div class="slide"><img src="images/recruit2.jpg" alt="院内の雰囲気"></div>
+            <div class="slide"><img src="images/recruit3.jpg" alt="研修・勉強会の様子"></div>
+            <div class="slide"><img src="images/recruit4.jpg" alt="診療補助の様子"></div>
+            <div class="slide"><img src="images/recruit5.jpg" alt="スタッフ写真"></div>
+          </div>
+
+          <button class="nav prev" type="button" aria-label="前の写真" id="prevRecruit">‹</button>
+          <button class="nav next" type="button" aria-label="次の写真" id="nextRecruit">›</button>
+          <div class="dots" id="recruitDots" aria-label="スライド選択"></div>
+        </div>
+
         <p style="margin-top:12px;">
-          <a href="tel:0458938855" class="btn" style="max-width: 360px; width:auto;" aria-label="採用について電話する">📞 045-893-8855</a>
+         
         </p>
       </div>
 
@@ -539,6 +557,160 @@
             </p>
           </div>
         </div>
+      </div>
+
+      <!-- 施設情報（施設責任者の下へ移動） -->
+      <div class="card" id="facility" style="grid-column: 1 / -1;">
+        <h2>施設情報</h2>
+        <h3 style="margin:10px 0 6px; font-size:15px;">施設基準（届出事項）</h3>
+        <p style="margin-top:0; color:var(--muted);">
+          当院は、厚生労働省の定める以下の施設基準等の届出を行っています。
+        </p>
+       <div class="facility-standards">
+  <div class="fs-item">
+    <div class="fs-title">医療DX推進体制整備加算（医療DX）</div>
+    <div class="fs-desc">
+      オンライン資格確認等を活用し、受診歴・薬剤情報・特定健診情報など、診療に必要な情報を取得・活用して、より安全で質の高い診療の提供に努めています。
+    </div>
+  </div>
+
+  <div class="fs-item">
+    <div class="fs-title">初診料（歯科）の注1に掲げる基準（歯初診）</div>
+    <div class="fs-desc">
+      歯科外来診療における院内感染防止対策について、必要な体制・機器を整え、研修を受けた常勤の歯科医師およびスタッフが在籍しています。
+    </div>
+  </div>
+
+  <div class="fs-item">
+    <div class="fs-title">歯科外来診療医療安全対策加算1（外安全1）</div>
+    <div class="fs-desc">
+      医療安全に関する研修を受けた歯科医師・医療安全管理者を配置し、緊急時対応に備えた機器（AED等）を整備するなど、安心して診療を受けていただける体制を整えています。
+    </div>
+  </div>
+
+  <div class="fs-item">
+    <div class="fs-title">歯科外来診療感染対策加算2（外感染2）</div>
+    <div class="fs-desc">
+      院内感染管理者を配置し、標準予防策（スタンダードプリコーション）に基づく感染対策を実施しています。感染症発生時にも、関係機関と連携しながら円滑に診療を継続できる体制整備に努めています。
+    </div>
+  </div>
+
+  <div class="fs-item">
+    <div class="fs-title">口腔管理体制強化加算（口管強）</div>
+    <div class="fs-desc">
+      むし歯・歯周病の重症化予防に資する継続的な管理や、口腔機能（咀嚼・嚥下等）に配慮した支援を行える体制を整えています。高齢者・小児の特性や緊急時対応に関する研修等を踏まえ、地域と連携した取り組みを行っています。
+    </div>
+  </div>
+
+  <div class="fs-item">
+    <div class="fs-title">在宅療養支援歯科診療所2（歯援診2）</div>
+    <div class="fs-desc">
+      通院が困難な患者さまに対して、歯科訪問診療を提供できる体制を整えています。必要に応じて医科医療機関・介護関係者等と連携し、在宅療養中の口腔管理を支援します。
+    </div>
+  </div>
+
+  <div class="fs-item">
+    <div class="fs-title">手術用顕微鏡加算（手顕微加）</div>
+    <div class="fs-desc">
+      複雑な根管治療や根管内の異物除去など、精密さが求められる処置において、手術用顕微鏡を用いた治療を行える体制を整えています。
+    </div>
+  </div>
+
+  <div class="fs-item">
+    <div class="fs-title">口腔粘膜血管腫凝固術（口腔粘膜／口血凝）</div>
+    <div class="fs-desc">
+      診断のうえ適応がある場合、口腔粘膜の血管腫等に対して、凝固術を実施できる体制を整えています。安全性に配慮し、症状や部位に応じて適切に対応します。
+    </div>
+  </div>
+
+  <div class="fs-item">
+    <div class="fs-title">歯科技工士連携加算2（歯技連2）</div>
+    <div class="fs-desc">
+      補綴物（被せ物・詰め物等）の作製にあたり、歯科技工士（所）と密に連携し、必要な情報共有を行う体制を整えています。必要に応じて情報通信機器を用いた連携も行います。
+    </div>
+  </div>
+
+  <div class="fs-item">
+    <div class="fs-title">光学印象（光印象）</div>
+    <div class="fs-desc">
+      口腔内スキャナー等のデジタル機器を用いて歯型取り（印象採得）を行い、補綴物製作の精度向上・負担軽減に努めています（症例により従来法を選択する場合があります）。
+    </div>
+  </div>
+
+  <div class="fs-item">
+    <div class="fs-title">CAD／CAM冠及びCAD／CAMインレー（歯CAD）</div>
+    <div class="fs-desc">
+      CAD／CAMシステムを活用した冠（被せ物）・インレー（詰め物）による治療を行える体制を整えています。保険診療の適用範囲・適応は、症状や部位等により判断します。
+    </div>
+  </div>
+
+  <div class="fs-item">
+    <div class="fs-title">歯科技工加算1及び2（歯技工）</div>
+    <div class="fs-desc">
+      補綴物製作に関して、歯科技工士（所）との適切な連携・管理体制を整え、品質・適合性に配慮した補綴治療の提供に努めています。
+    </div>
+  </div>
+
+  <div class="fs-item">
+    <div class="fs-title">歯根端切除手術の注3（根切顕微）</div>
+    <div class="fs-desc">
+      歯根端切除手術において、手術用顕微鏡を用いた精密な処置を行える体制を整えています（症例により適応を判断します）。
+    </div>
+  </div>
+
+  <div class="fs-item">
+    <div class="fs-title">レーザー機器加算（手光機）</div>
+    <div class="fs-desc">
+      レーザー機器を用いた処置を行える体制を整えています。安全管理を徹底し、症状・部位・適応に応じて適切に使用します。
+    </div>
+  </div>
+
+  <div class="fs-item">
+    <div class="fs-title">クラウン・ブリッジ維持管理料（補管）</div>
+    <div class="fs-desc">
+      装着した冠（被せ物）やブリッジについて、装着後も快適に長くお使いいただけるよう、定期的なチェックや必要な調整を行うなど、一定期間の維持管理を行っています。
+    </div>
+  </div>
+
+  <div class="fs-item">
+    <div class="fs-title">歯科外来・在宅ベースアップ評価料（Ⅰ）（歯外在べⅠ）</div>
+    <div class="fs-desc">
+      医療現場で働く職員の処遇改善（賃上げ）を通じて人材確保に努め、良質な医療提供を継続できるよう取り組んでいます。ご理解のほどお願いいたします。
+    </div>
+  </div>
+
+  <div class="fs-item">
+    <div class="fs-title">薬剤料が175円以下の場合は薬剤名等の記載を省略（175）</div>
+    <div class="fs-desc">
+      一部の処方等において、薬剤料が一定額以下の場合は、明細等で薬剤名などの記載を省略することがあります。必要な場合は受付までお申し出ください。
+    </div>
+  </div>
+</div>
+
+<style>
+  /* 施設基準：見出し＞説明 の視認性を上げる（このブロックだけで完結） */
+  .facility-standards{ margin-top:10px; display:grid; gap:12px; }
+  .facility-standards .fs-item{
+    border:1px solid #eee;
+    border-radius:12px;
+    padding:12px 12px;
+    background:#fff;
+  }
+  .facility-standards .fs-title{
+    font-weight:800;
+    font-size:15px;
+    color:#222;
+    margin:0 0 6px;
+    line-height:1.4;
+  }
+  .facility-standards .fs-desc{
+    margin:0;
+    color:#555;
+    font-size:13.5px;
+    line-height:1.75;
+  }
+</style>
+
       </div>
 
     </div>
@@ -568,56 +740,75 @@
       });
     });
 
-    // スライダー
-    const slides = document.getElementById('clinicSlides');
-    const prevBtn = document.getElementById('prevSlide');
-    const nextBtn = document.getElementById('nextSlide');
-    const dotsWrap = document.getElementById('slideDots');
+    // 汎用スライダー初期化関数
+    function initSlider({ slidesId, prevId, nextId, dotsId }) {
+      const slides = document.getElementById(slidesId);
+      const prevBtn = document.getElementById(prevId);
+      const nextBtn = document.getElementById(nextId);
+      const dotsWrap = document.getElementById(dotsId);
 
-    if (!slides || !prevBtn || !nextBtn || !dotsWrap) return;
+      if (!slides || !prevBtn || !nextBtn || !dotsWrap) return;
 
-    const total = slides.children.length;
-    let index = 0;
+      const total = slides.children.length;
+      let index = 0;
 
-    const dots = [];
-    for (let i = 0; i < total; i++) {
-      const b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'dot' + (i === 0 ? ' active' : '');
-      b.setAttribute('aria-label', (i+1) + '枚目へ');
-      b.addEventListener('click', () => go(i));
-      dotsWrap.appendChild(b);
-      dots.push(b);
-    }
+      dotsWrap.innerHTML = "";
+      const dots = [];
+      for (let i = 0; i < total; i++) {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'dot' + (i === 0 ? ' active' : '');
+        b.setAttribute('aria-label', (i+1) + '枚目へ');
+        b.addEventListener('click', () => go(i));
+        dotsWrap.appendChild(b);
+        dots.push(b);
+      }
 
-    function update() {
-      slides.style.transform = `translateX(${-index * 100}%)`;
-      dots.forEach((d, i) => d.classList.toggle('active', i === index));
-    }
+      function update() {
+        slides.style.transform = `translateX(${-index * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === index));
+      }
 
-    function go(i) {
-      index = (i + total) % total;
+      function go(i) {
+        index = (i + total) % total;
+        update();
+      }
+
+      prevBtn.addEventListener('click', () => go(index - 1));
+      nextBtn.addEventListener('click', () => go(index + 1));
+
+      // swipe
+      let startX = null;
+      slides.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+      }, {passive:true});
+
+      slides.addEventListener('touchend', (e) => {
+        if (startX === null) return;
+        const endX = e.changedTouches[0].clientX;
+        const dx = endX - startX;
+        startX = null;
+        if (Math.abs(dx) > 40) go(index + (dx < 0 ? 1 : -1));
+      });
+
       update();
     }
 
-    prevBtn.addEventListener('click', () => go(index - 1));
-    nextBtn.addEventListener('click', () => go(index + 1));
-
-    // swipe
-    let startX = null;
-    slides.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-    }, {passive:true});
-
-    slides.addEventListener('touchend', (e) => {
-      if (startX === null) return;
-      const endX = e.changedTouches[0].clientX;
-      const dx = endX - startX;
-      startX = null;
-      if (Math.abs(dx) > 40) go(index + (dx < 0 ? 1 : -1));
+    // 医院写真（4枚）
+    initSlider({
+      slidesId: 'clinicSlides',
+      prevId: 'prevSlide',
+      nextId: 'nextSlide',
+      dotsId: 'slideDots'
     });
 
-    update();
+    // 採用写真（5枚）
+    initSlider({
+      slidesId: 'recruitSlides',
+      prevId: 'prevRecruit',
+      nextId: 'nextRecruit',
+      dotsId: 'recruitDots'
+    });
   })();
   </script>
 </body>
